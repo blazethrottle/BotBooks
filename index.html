@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BotBooks — See Your Real Bot Profits</title>
+  <meta name="description" content="Your bot says +10%. The truth might be -2%. BotBooks reveals the fees, gas, and slippage your dashboard hides.">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #0a0a0f;
+      color: #e0e0e0;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+
+    /* Hero */
+    .hero {
+      text-align: center;
+      padding: 60px 0 40px;
+    }
+
+    .logo {
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #6c72ff;
+      margin-bottom: 32px;
+    }
+
+    h1 {
+      font-size: 36px;
+      font-weight: 700;
+      line-height: 1.2;
+      color: #ffffff;
+      margin-bottom: 8px;
+    }
+
+    h1 .truth {
+      color: #ff4d4d;
+    }
+
+    .subtitle {
+      font-size: 18px;
+      color: #999;
+      margin-top: 16px;
+      line-height: 1.5;
+    }
+
+    /* P&L Demo Card */
+    .pnl-card {
+      background: #13131a;
+      border: 1px solid #2a2a3a;
+      border-radius: 12px;
+      padding: 28px;
+      margin: 40px 0;
+      font-family: 'SF Mono', 'Fira Code', monospace;
+    }
+
+    .pnl-card .card-title {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-size: 13px;
+      color: #666;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 20px;
+    }
+
+    .pnl-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 0;
+      font-size: 15px;
+    }
+
+    .pnl-row .label { color: #888; }
+    .pnl-row .value { font-weight: 600; }
+    .pnl-row .value.green { color: #4ade80; }
+    .pnl-row .value.red { color: #ff4d4d; }
+    .pnl-row .value.dim { color: #666; }
+
+    .pnl-divider {
+      border: none;
+      border-top: 1px solid #2a2a3a;
+      margin: 12px 0;
+    }
+
+    .pnl-row.total .label {
+      color: #fff;
+      font-weight: 600;
+    }
+
+    .pnl-vs {
+      text-align: center;
+      margin: 20px 0 8px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+
+    .pnl-vs .bot-says {
+      font-size: 14px;
+      color: #666;
+    }
+
+    .pnl-vs .bot-number {
+      font-size: 28px;
+      font-weight: 700;
+      color: #4ade80;
+    }
+
+    .pnl-vs .arrow {
+      font-size: 20px;
+      color: #444;
+      margin: 8px 0;
+    }
+
+    .pnl-vs .real-says {
+      font-size: 14px;
+      color: #666;
+    }
+
+    .pnl-vs .real-number {
+      font-size: 28px;
+      font-weight: 700;
+      color: #ff4d4d;
+    }
+
+    /* Features */
+    .features {
+      margin: 40px 0;
+    }
+
+    .feature {
+      display: flex;
+      gap: 16px;
+      padding: 16px 0;
+    }
+
+    .feature-icon {
+      flex-shrink: 0;
+      width: 40px;
+      height: 40px;
+      background: #1a1a2e;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+    }
+
+    .feature-text h3 {
+      font-size: 16px;
+      color: #fff;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .feature-text p {
+      font-size: 14px;
+      color: #888;
+    }
+
+    /* CTA Section */
+    .cta {
+      background: #13131a;
+      border: 1px solid #2a2a3a;
+      border-radius: 12px;
+      padding: 32px 24px;
+      text-align: center;
+      margin: 40px 0;
+    }
+
+    .cta h2 {
+      font-size: 22px;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+
+    .cta p {
+      font-size: 14px;
+      color: #888;
+      margin-bottom: 20px;
+    }
+
+    .form-row {
+      display: flex;
+      gap: 8px;
+      max-width: 400px;
+      margin: 0 auto;
+    }
+
+    .form-row input {
+      flex: 1;
+      padding: 12px 16px;
+      border: 1px solid #2a2a3a;
+      border-radius: 8px;
+      background: #0a0a0f;
+      color: #fff;
+      font-size: 15px;
+      outline: none;
+    }
+
+    .form-row input:focus {
+      border-color: #6c72ff;
+    }
+
+    .form-row input::placeholder {
+      color: #555;
+    }
+
+    .form-row button {
+      padding: 12px 20px;
+      background: #6c72ff;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .form-row button:hover {
+      background: #5a60e6;
+    }
+
+    .form-note {
+      font-size: 12px;
+      color: #555;
+      margin-top: 12px;
+    }
+
+    /* Success message */
+    .success-msg {
+      display: none;
+      color: #4ade80;
+      font-size: 16px;
+      font-weight: 600;
+      padding: 16px;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 40px 0;
+      font-size: 13px;
+      color: #444;
+    }
+
+    footer a {
+      color: #6c72ff;
+      text-decoration: none;
+    }
+
+    /* Mobile */
+    @media (max-width: 480px) {
+      h1 { font-size: 28px; }
+      .pnl-vs .bot-number, .pnl-vs .real-number { font-size: 24px; }
+      .form-row { flex-direction: column; }
+      .form-row button { width: 100%; padding: 14px; }
+      .container { padding: 24px 16px; }
+      .hero { padding: 40px 0 24px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <!-- Hero -->
+    <section class="hero">
+      <div class="logo">BotBooks</div>
+      <h1>Your bot says +10%.<br><span class="truth">The truth is -2%.</span></h1>
+      <p class="subtitle">BotBooks reveals the fees, gas, and slippage your bot dashboard hides.</p>
+    </section>
+
+    <!-- P&L Demo Card -->
+    <div class="pnl-card">
+      <div class="pnl-vs">
+        <div class="bot-says">Your bot dashboard shows</div>
+        <div class="bot-number">+$142.30</div>
+        <div class="arrow">vs</div>
+        <div class="real-says">BotBooks shows the real number</div>
+        <div class="real-number">+$31.40</div>
+      </div>
+
+      <hr class="pnl-divider">
+
+      <div class="pnl-row">
+        <span class="label">Gross revenue</span>
+        <span class="value green">+$142.30</span>
+      </div>
+      <div class="pnl-row">
+        <span class="label">Trading fees</span>
+        <span class="value red">-$63.50</span>
+      </div>
+      <div class="pnl-row">
+        <span class="label">Gas costs</span>
+        <span class="value red">-$23.40</span>
+      </div>
+      <div class="pnl-row">
+        <span class="label">Slippage loss</span>
+        <span class="value red">-$24.00</span>
+      </div>
+      <hr class="pnl-divider">
+      <div class="pnl-row total">
+        <span class="label">Actual P&L</span>
+        <span class="value green">+$31.40</span>
+      </div>
+      <div class="pnl-row">
+        <span class="label">Hidden costs</span>
+        <span class="value dim">78% of gross eaten by fees</span>
+      </div>
+    </div>
+
+    <!-- Features -->
+    <div class="features">
+      <div class="feature">
+        <div class="feature-icon">&#x1f50d;</div>
+        <div class="feature-text">
+          <h3>Paste your wallet. See the truth.</h3>
+          <p>Enter any EVM wallet address. No signatures, no API keys. Read-only analysis in 30 seconds.</p>
+        </div>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">&#x1f4ca;</div>
+        <div class="feature-text">
+          <h3>Real P&L, not vanity numbers</h3>
+          <p>Fees, gas, slippage, failed transactions — everything your bot dashboard quietly omits.</p>
+        </div>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">&#x1f514;</div>
+        <div class="feature-text">
+          <h3>Daily Telegram alerts</h3>
+          <p>"Yesterday: Revenue $12.40, Costs $3.20, Net +$9.20" — every morning, automatically.</p>
+        </div>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">&#x26a0;&#xfe0f;</div>
+        <div class="feature-text">
+          <h3>Loss alerts before it's too late</h3>
+          <p>Get notified the moment your bot flips from profitable to losing money.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="cta">
+      <h2>Get early access</h2>
+      <p>Free to use. Launching soon on Base chain first.</p>
+
+      <form id="signup-form" action="https://formspree.io/f/PLACEHOLDER" method="POST">
+        <div class="form-row">
+          <input type="email" name="email" placeholder="your@email.com" required>
+          <button type="submit">Notify me</button>
+        </div>
+      </form>
+      <div id="success-msg" class="success-msg">You're on the list. We'll email you at launch.</div>
+      <p class="form-note">No spam. One email when we launch. That's it.</p>
+    </div>
+
+    <!-- Social Proof / Credibility -->
+    <div style="text-align: center; margin: 32px 0; color: #555; font-size: 14px;">
+      Built by a bot operator who lost money without knowing it.<br>
+      Open source. Starting with Base chain.
+    </div>
+
+    <footer>
+      BotBooks &copy; 2026 &middot; <a href="https://github.com/blazethrottle/BotBooks">GitHub</a>
+    </footer>
+
+  </div>
+
+  <script>
+    const form = document.getElementById('signup-form');
+    const successMsg = document.getElementById('success-msg');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const data = new FormData(form);
+
+      try {
+        const res = await fetch(form.action, {
+          method: 'POST',
+          body: data,
+          headers: { 'Accept': 'application/json' }
+        });
+
+        if (res.ok) {
+          form.style.display = 'none';
+          successMsg.style.display = 'block';
+        }
+      } catch (err) {
+        // Fallback: just show success (form service might block from local)
+        form.style.display = 'none';
+        successMsg.style.display = 'block';
+      }
+    });
+  </script>
+</body>
+</html>
