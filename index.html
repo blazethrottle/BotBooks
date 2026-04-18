@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BotBooks — See Your Real Bot Profits</title>
-  <meta name="description" content="Your bot says +10%. The truth might be -2%. BotBooks reveals the fees, gas, and slippage your dashboard hides.">
+  <title>Agent Treasury — Real USDC P&L for Your AI Agents</title>
+  <meta name="description" content="Track the gas, failed transactions, and API costs hidden by your AI agent's dashboard. Built for ACP, OpenClaw, Virtuals Protocol operators.">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -189,15 +189,26 @@
       margin-bottom: 20px;
     }
 
-    .form-row {
-      display: flex;
-      gap: 8px;
+    .form-field {
+      margin-bottom: 12px;
       max-width: 400px;
-      margin: 0 auto;
+      margin-left: auto;
+      margin-right: auto;
+      text-align: left;
     }
 
-    .form-row input {
-      flex: 1;
+    .form-field label {
+      display: block;
+      font-size: 12px;
+      color: #888;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .form-field input,
+    .form-field select {
+      width: 100%;
       padding: 12px 16px;
       border: 1px solid #2a2a3a;
       border-radius: 8px;
@@ -205,18 +216,61 @@
       color: #fff;
       font-size: 15px;
       outline: none;
+      font-family: inherit;
     }
 
-    .form-row input:focus {
+    .form-field input:focus,
+    .form-field select:focus {
       border-color: #6c72ff;
     }
 
-    .form-row input::placeholder {
+    .form-field input::placeholder {
       color: #555;
     }
 
-    .form-row button {
-      padding: 12px 20px;
+    .price-options {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+      max-width: 400px;
+      margin: 0 auto 12px;
+    }
+
+    .price-option {
+      position: relative;
+    }
+
+    .price-option input[type="radio"] {
+      position: absolute;
+      opacity: 0;
+    }
+
+    .price-option label {
+      display: block;
+      padding: 12px;
+      border: 1px solid #2a2a3a;
+      border-radius: 8px;
+      background: #0a0a0f;
+      color: #ccc;
+      font-size: 14px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.15s;
+      text-transform: none;
+      letter-spacing: normal;
+      margin-bottom: 0;
+    }
+
+    .price-option input[type="radio"]:checked + label {
+      border-color: #6c72ff;
+      background: #1a1a2e;
+      color: #fff;
+    }
+
+    .submit-btn {
+      width: 100%;
+      max-width: 400px;
+      padding: 14px 20px;
       background: #6c72ff;
       color: #fff;
       border: none;
@@ -224,10 +278,10 @@
       font-size: 15px;
       font-weight: 600;
       cursor: pointer;
-      white-space: nowrap;
+      margin-top: 8px;
     }
 
-    .form-row button:hover {
+    .submit-btn:hover {
       background: #5a60e6;
     }
 
@@ -263,8 +317,7 @@
     @media (max-width: 480px) {
       h1 { font-size: 28px; }
       .pnl-vs .bot-number, .pnl-vs .real-number { font-size: 24px; }
-      .form-row { flex-direction: column; }
-      .form-row button { width: 100%; padding: 14px; }
+      .price-options { grid-template-columns: 1fr; }
       .container { padding: 24px 16px; }
       .hero { padding: 40px 0 24px; }
     }
@@ -275,47 +328,51 @@
 
     <!-- Hero -->
     <section class="hero">
-      <div class="logo">BotBooks</div>
-      <h1>Your bot says +10%.<br><span class="truth">The truth is -2%.</span></h1>
-      <p class="subtitle">BotBooks reveals the fees, gas, and slippage your bot dashboard hides.</p>
+      <div class="logo">Agent Treasury</div>
+      <h1>Your agent earned 250 USDC.<br><span class="truth">The real net is 47.</span></h1>
+      <p class="subtitle">Gas, failed transactions, and API costs your agent's dashboard hides — in one number.</p>
     </section>
 
     <!-- P&L Demo Card -->
     <div class="pnl-card">
       <div class="pnl-vs">
-        <div class="bot-says">Your bot dashboard shows</div>
-        <div class="bot-number">+$142.30</div>
+        <div class="bot-says">Your agent dashboard shows</div>
+        <div class="bot-number">+250 USDC</div>
         <div class="arrow">vs</div>
-        <div class="real-says">BotBooks shows the real number</div>
-        <div class="real-number">+$31.40</div>
+        <div class="real-says">Agent Treasury shows the real number</div>
+        <div class="real-number">+47 USDC</div>
       </div>
 
       <hr class="pnl-divider">
 
       <div class="pnl-row">
-        <span class="label">Gross revenue</span>
-        <span class="value green">+$142.30</span>
+        <span class="label">Gross revenue (USDC)</span>
+        <span class="value green">+250.00</span>
       </div>
       <div class="pnl-row">
-        <span class="label">Trading fees</span>
-        <span class="value red">-$63.50</span>
+        <span class="label">Gas (incl. failed tx)</span>
+        <span class="value red">-78.00</span>
       </div>
       <div class="pnl-row">
-        <span class="label">Gas costs</span>
-        <span class="value red">-$23.40</span>
+        <span class="label">Failed transactions</span>
+        <span class="value red">-42.00</span>
       </div>
       <div class="pnl-row">
-        <span class="label">Slippage loss</span>
-        <span class="value red">-$24.00</span>
+        <span class="label">API / LLM costs</span>
+        <span class="value red">-63.00</span>
+      </div>
+      <div class="pnl-row">
+        <span class="label">Platform fees</span>
+        <span class="value red">-20.00</span>
       </div>
       <hr class="pnl-divider">
       <div class="pnl-row total">
-        <span class="label">Actual P&L</span>
-        <span class="value green">+$31.40</span>
+        <span class="label">Actual net</span>
+        <span class="value green">+47.00 USDC</span>
       </div>
       <div class="pnl-row">
         <span class="label">Hidden costs</span>
-        <span class="value dim">78% of gross eaten by fees</span>
+        <span class="value dim">81% eaten by operational overhead</span>
       </div>
     </div>
 
@@ -324,56 +381,104 @@
       <div class="feature">
         <div class="feature-icon">&#x1f50d;</div>
         <div class="feature-text">
-          <h3>Paste your wallet. See the truth.</h3>
-          <p>Enter any EVM wallet address. No signatures, no API keys. Read-only analysis in 30 seconds.</p>
+          <h3>Paste your agent wallet. See the truth.</h3>
+          <p>Enter any agent wallet address. Read-only analysis, no signatures, no API keys. EVM chains first (Base, Arc), Solana next.</p>
         </div>
       </div>
       <div class="feature">
-        <div class="feature-icon">&#x1f4ca;</div>
+        <div class="feature-icon">&#x1f4b5;</div>
         <div class="feature-text">
-          <h3>Real P&L, not vanity numbers</h3>
-          <p>Fees, gas, slippage, failed transactions — everything your bot dashboard quietly omits.</p>
+          <h3>Native USDC accounting</h3>
+          <p>No USD estimates, no price slippage. Track real USDC flow — the currency your agent actually earns and spends.</p>
         </div>
       </div>
       <div class="feature">
         <div class="feature-icon">&#x1f514;</div>
         <div class="feature-text">
-          <h3>Daily Telegram alerts</h3>
-          <p>"Yesterday: Revenue $12.40, Costs $3.20, Net +$9.20" — every morning, automatically.</p>
+          <h3>Daily digest on Telegram or Discord</h3>
+          <p>"Yesterday: 42 USDC in, 18 USDC out, net +24. Runway: 27 days." Every morning, automatically.</p>
         </div>
       </div>
       <div class="feature">
         <div class="feature-icon">&#x26a0;&#xfe0f;</div>
         <div class="feature-text">
-          <h3>Loss alerts before it's too late</h3>
-          <p>Get notified the moment your bot flips from profitable to losing money.</p>
+          <h3>Runway alerts before it's too late</h3>
+          <p>Get notified the moment your agent burns through its USDC faster than it earns — before it stops working.</p>
         </div>
       </div>
     </div>
 
     <!-- CTA -->
     <div class="cta">
-      <h2>Get early access</h2>
-      <p>Free to use. Launching soon on Base chain first.</p>
+      <h2>Early access</h2>
+      <p>Tell us about your agent. Prioritized by interest.</p>
 
       <form id="signup-form" action="https://formspree.io/f/xlgagvql" method="POST">
-        <div class="form-row">
-          <input type="email" name="email" placeholder="your@email.com" required>
-          <button type="submit">Notify me</button>
+        <div class="form-field">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" placeholder="your@email.com" required>
         </div>
+
+        <div class="form-field">
+          <label for="platform">Agent platform</label>
+          <select id="platform" name="platform" required>
+            <option value="">Select…</option>
+            <option value="ACP">ACP (Virtuals)</option>
+            <option value="OpenClaw">OpenClaw</option>
+            <option value="Virtuals">Virtuals Protocol</option>
+            <option value="Custom">Custom / own stack</option>
+            <option value="Other">Other</option>
+            <option value="Exploring">Still exploring</option>
+          </select>
+        </div>
+
+        <div class="form-field">
+          <label>What would you pay per month?</label>
+          <div class="price-options">
+            <div class="price-option">
+              <input type="radio" id="p19" name="price_interest" value="$19/mo" required>
+              <label for="p19">$19/mo</label>
+            </div>
+            <div class="price-option">
+              <input type="radio" id="p29" name="price_interest" value="$29/mo">
+              <label for="p29">$29/mo</label>
+            </div>
+            <div class="price-option">
+              <input type="radio" id="p49" name="price_interest" value="$49/mo">
+              <label for="p49">$49/mo</label>
+            </div>
+            <div class="price-option">
+              <input type="radio" id="pfree" name="price_interest" value="free_only">
+              <label for="pfree">Free only</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-field">
+          <label for="alert_channel">Preferred alert channel</label>
+          <select id="alert_channel" name="alert_channel" required>
+            <option value="">Select…</option>
+            <option value="telegram">Telegram</option>
+            <option value="discord">Discord</option>
+            <option value="email">Email only</option>
+            <option value="none">No alerts needed</option>
+          </select>
+        </div>
+
+        <button type="submit" class="submit-btn">Get early access</button>
       </form>
-      <div id="success-msg" class="success-msg">You're on the list. We'll email you at launch.</div>
-      <p class="form-note">No spam. One email when we launch. That's it.</p>
+      <div id="success-msg" class="success-msg">You're on the list. We'll reach out when access opens.</div>
+      <p class="form-note">No spam. One email when access opens. That's it.</p>
     </div>
 
     <!-- Social Proof / Credibility -->
     <div style="text-align: center; margin: 32px 0; color: #555; font-size: 14px;">
-      Built by a bot operator who lost money without knowing it.<br>
-      Open source. Starting with Base chain.
+      Built for operators running agents on ACP, OpenClaw, Virtuals Protocol, and Circle Arc.<br>
+      Native USDC. Starting with Base.
     </div>
 
     <footer>
-      BotBooks &copy; 2026 &middot; <a href="https://github.com/blazethrottle/BotBooks">GitHub</a>
+      Agent Treasury &copy; 2026 &middot; <a href="https://github.com/blazethrottle/BotBooks">GitHub</a>
     </footer>
 
   </div>
@@ -398,7 +503,6 @@
           successMsg.style.display = 'block';
         }
       } catch (err) {
-        // Fallback: just show success (form service might block from local)
         form.style.display = 'none';
         successMsg.style.display = 'block';
       }
