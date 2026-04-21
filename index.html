@@ -228,45 +228,6 @@
       color: #555;
     }
 
-    .price-options {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 8px;
-      max-width: 400px;
-      margin: 0 auto 12px;
-    }
-
-    .price-option {
-      position: relative;
-    }
-
-    .price-option input[type="radio"] {
-      position: absolute;
-      opacity: 0;
-    }
-
-    .price-option label {
-      display: block;
-      padding: 12px;
-      border: 1px solid #2a2a3a;
-      border-radius: 8px;
-      background: #0a0a0f;
-      color: #ccc;
-      font-size: 14px;
-      text-align: center;
-      cursor: pointer;
-      transition: all 0.15s;
-      text-transform: none;
-      letter-spacing: normal;
-      margin-bottom: 0;
-    }
-
-    .price-option input[type="radio"]:checked + label {
-      border-color: #6c72ff;
-      background: #1a1a2e;
-      color: #fff;
-    }
-
     .submit-btn {
       width: 100%;
       max-width: 400px;
@@ -317,7 +278,6 @@
     @media (max-width: 480px) {
       h1 { font-size: 28px; }
       .pnl-vs .bot-number, .pnl-vs .real-number { font-size: 24px; }
-      .price-options { grid-template-columns: 1fr; }
       .container { padding: 24px 16px; }
       .hero { padding: 40px 0 24px; }
     }
@@ -433,25 +393,26 @@
         </div>
 
         <div class="form-field">
-          <label>What would you pay per month?</label>
-          <div class="price-options">
-            <div class="price-option">
-              <input type="radio" id="p19" name="price_interest" value="$19/mo" required>
-              <label for="p19">$19/mo</label>
-            </div>
-            <div class="price-option">
-              <input type="radio" id="p29" name="price_interest" value="$29/mo">
-              <label for="p29">$29/mo</label>
-            </div>
-            <div class="price-option">
-              <input type="radio" id="p49" name="price_interest" value="$49/mo">
-              <label for="p49">$49/mo</label>
-            </div>
-            <div class="price-option">
-              <input type="radio" id="pfree" name="price_interest" value="free_only">
-              <label for="pfree">Free only</label>
-            </div>
-          </div>
+          <label for="monthly_overhead">How much is operational overhead eating per month? (best estimate)</label>
+          <select id="monthly_overhead" name="monthly_overhead" required>
+            <option value="">Select…</option>
+            <option value="under_50">Under $50</option>
+            <option value="50_200">$50 &ndash; $200</option>
+            <option value="200_1000">$200 &ndash; $1,000</option>
+            <option value="over_1000">Over $1,000</option>
+            <option value="dont_know">Don't know (this is part of the problem)</option>
+          </select>
+        </div>
+
+        <div class="form-field">
+          <label for="urgency">How urgent is fixing this?</label>
+          <select id="urgency" name="urgency" required>
+            <option value="">Select…</option>
+            <option value="yesterday">Need it yesterday &mdash; will try any tool</option>
+            <option value="pay_after_proof">Would pay once I see it work</option>
+            <option value="free_curious">Curious &mdash; would try free version</option>
+            <option value="exploring">Just exploring</option>
+          </select>
         </div>
 
         <div class="form-field">
